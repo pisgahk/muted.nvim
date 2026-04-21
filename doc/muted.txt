@@ -1,0 +1,309 @@
+*muted.txt*  A muted, low-contrast Neovim colourscheme
+
+Author:   pisgahk <https://github.com/pisgahk>
+Repo:     https://github.com/pisgahk/muted.nvim
+License:  MIT
+
+==============================================================================
+CONTENTS                                                        *muted-contents*
+
+  1. Introduction ................. |muted-intro|
+  2. Requirements ................. |muted-requirements|
+  3. Installation ................. |muted-install|
+     3.1 lazy.nvim ................ |muted-install-lazy|
+     3.2 Local / no plugin manager  |muted-install-local|
+  4. Usage ........................ |muted-usage|
+  5. Flavours ..................... |muted-flavours|
+  6. API .......................... |muted-api|
+  7. Plugin Support ............... |muted-plugins|
+  8. Structure .................... |muted-structure|
+  9. Customisation ................ |muted-customisation|
+ 10. Troubleshooting .............. |muted-troubleshooting|
+
+==============================================================================
+1. INTRODUCTION                                                   *muted-intro*
+
+muted.nvim is a low-contrast Neovim colourscheme built around warm neutrals,
+earthy greens, and dusty purples. It is designed to be easy on the eyes during
+long editing sessions while still providing enough contrast for comfortable
+code reading.
+
+Coverage includes:
+  - Editor chrome (Normal, LineNr, StatusLine, WinSeparator, …)
+  - Treesitter `@` capture groups
+  - LSP semantic tokens (`@lsp.*`)
+  - LSP diagnostics and reference highlights
+  - Diff and Git integration
+  - A wide range of popular plugins (see |muted-plugins|)
+
+muted.nvim follows a Catppuccin-style architecture: a single palette module
+feeds all highlight definitions, making it straightforward to fork or extend.
+
+==============================================================================
+2. REQUIREMENTS                                                *muted-requirements*
+
+  - Neovim >= 0.8.0
+  - A terminal with `termguicolors` support (true colour)
+
+Enable true colour in your config if not already set: >lua
+  vim.opt.termguicolors = true
+<
+
+==============================================================================
+3. INSTALLATION                                                 *muted-install*
+
+------------------------------------------------------------------------------
+3.1 With lazy.nvim                                         *muted-install-lazy*
+
+Add the following to your lazy.nvim plugin spec: >lua
+  {
+    "pisgahk/muted.nvim",
+    lazy = false,    -- load at startup, not on demand
+    priority = 1000, -- load before all other plugins
+    config = function()
+      vim.cmd.colorscheme("muted")
+    end,
+  }
+<
+
+To load from a local path instead of GitHub: >lua
+  {
+    dir = "/absolute/path/to/muted.nvim",
+    name = "muted.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("muted")
+    end,
+  }
+<
+
+Then run `:Lazy sync` or restart Neovim.
+
+------------------------------------------------------------------------------
+3.2 Local / no plugin manager                             *muted-install-local*
+
+Clone directly into Neovim's pack directory: >sh
+  git clone https://github.com/pisgahk/muted.nvim \
+    ~/.local/share/nvim/site/pack/muted/start/muted.nvim
+<
+
+Or prepend to `runtimepath` manually in your `init.lua`: >lua
+  -- Must appear before any colorscheme call
+  vim.opt.runtimepath:prepend("/path/to/muted.nvim")
+  vim.cmd.colorscheme("muted")
+<
+
+==============================================================================
+4. USAGE                                                          *muted-usage*
+
+Activate via the standard Neovim command: >vim
+  :colorscheme muted
+<
+
+Or from Lua: >lua
+  vim.cmd.colorscheme("muted")
+<
+
+Or using the public API (see |muted-api|): >lua
+  require("muted").load()
+<
+
+Verify the colourscheme loaded correctly: >vim
+  :echo g:colors_name
+  " expected output: muted
+<
+
+Inspect a highlight group to confirm colours are applied: >vim
+  :Inspect
+  " or
+  :hi Normal
+<
+
+==============================================================================
+5. FLAVOURS                                                     *muted-flavours*
+
+muted.nvim ships four flavours, each with its own mood while sharing the same
+low-contrast, muted design language:
+
+  earth   Warm browns and ochres — the default flavour
+  fire    Ember reds and burnt oranges
+  water   Cool teals and slate blues
+  air     Pale greys and soft whites
+
+To select a specific flavour, load its colourscheme name: >vim
+  :colorscheme muted-earth
+  :colorscheme muted-fire
+  :colorscheme muted-water
+  :colorscheme muted-air
+<
+
+Or via Lua: >lua
+  vim.cmd.colorscheme("muted-fire")
+<
+
+Each flavour has its own entry point under `colors/` and shares the same
+highlight architecture — only the palette values differ.
+
+==============================================================================
+6. API                                                              *muted-api*
+
+muted.nvim exposes a small public Lua API through `require("muted")`.
+
+------------------------------------------------------------------------------
+`require("muted").load()`                                     *muted.load()*
+
+Loads the colourscheme programmatically. Equivalent to: >vim
+  :colorscheme muted
+<
+Example: >lua
+  require("muted").load()
+<
+
+------------------------------------------------------------------------------
+`require("muted").palette`                                  *muted.palette*
+
+Returns the active palette table. Useful for reading colour values in your
+own highlight overrides: >lua
+  local p = require("muted").palette
+  vim.api.nvim_set_hl(0, "MyCustomGroup", { fg = p.green, bg = p.base })
+<
+
+The palette is defined in `lua/muted/palette.lua`. See |muted-customisation|
+for how to override colours.
+
+==============================================================================
+7. PLUGIN SUPPORT                                               *muted-plugins*
+
+The following plugins have dedicated highlight coverage in muted.nvim:
+
+  Plugin                         Covered ~
+  ──────────────────────────────────────────
+  Treesitter (`@` captures)        ✓
+  LSP semantic tokens (`@lsp.*`)   ✓
+  Diagnostics & LSP references     ✓
+  Diff / Git                       ✓
+  gitsigns.nvim                    ✓
+  Telescope                        ✓
+  nvim-cmp                         ✓
+  neo-tree / nvim-tree             ✓
+  which-key                        ✓
+  indent-blankline (ibl)           ✓
+  mini.nvim (statusline,           ✓
+    cursorword, pick)
+  nvim-notify                      ✓
+  Noice                            ✓
+  lazy.nvim                        ✓
+  Mason                            ✓
+
+If a plugin you use is not listed, highlight groups will fall back to the
+standard Neovim linked groups, which muted.nvim also covers. Open an issue
+on the repository to request explicit support for additional plugins.
+
+==============================================================================
+8. STRUCTURE                                                   *muted-structure*
+
+>
+  muted.nvim/
+  ├── colors/
+  │   ├── muted.lua          ← :colorscheme muted entry point
+  │   ├── muted-earth.lua    ← :colorscheme muted-earth
+  │   ├── muted-fire.lua     ← :colorscheme muted-fire
+  │   ├── muted-water.lua    ← :colorscheme muted-water
+  │   └── muted-air.lua      ← :colorscheme muted-air
+  ├── lua/muted/
+  │   ├── init.lua           ← Public API: require("muted").load()
+  │   ├── palette.lua        ← All colour values in one place
+  │   └── highlights.lua     ← All highlight group definitions
+  └── doc/
+      ├── muted.txt          ← This file
+      └── tags               ← Generated by :helptags doc/
+<
+
+  colors/          Each file sets `vim.g.colors_name` and calls the
+                   appropriate palette + highlight loader.
+
+  palette.lua      Single source of truth for all hex colour values.
+                   Edit this file to change colours globally.
+
+  highlights.lua   Maps palette values to Neovim highlight groups.
+                   Edit this file to change how groups are styled.
+
+==============================================================================
+9. CUSTOMISATION                                           *muted-customisation*
+
+------------------------------------------------------------------------------
+Overriding palette colours~
+
+To tweak individual colours without forking the plugin, override highlight
+groups after loading the colourscheme: >lua
+  vim.cmd.colorscheme("muted")
+
+  -- Override after load
+  vim.api.nvim_set_hl(0, "Normal",   { bg = "#1a1a1a" })
+  vim.api.nvim_set_hl(0, "Comment",  { fg = "#6a6a6a", italic = true })
+<
+
+------------------------------------------------------------------------------
+Editing palette.lua directly~
+
+For deeper changes, edit `lua/muted/palette.lua` in the plugin source. All
+highlight groups source their colours from this file, so a single hex change
+propagates everywhere: >lua
+  -- lua/muted/palette.lua (excerpt)
+  local M = {}
+
+  M.base    = "#1e1d1b"
+  M.surface = "#272523"
+  M.green   = "#7a9e7e"   -- change this one value to retheme all greens
+  -- ...
+
+  return M
+<
+
+After editing, reload with: >vim
+  :source $MYVIMRC
+  :colorscheme muted
+<
+
+------------------------------------------------------------------------------
+Editing highlights.lua~
+
+To add or adjust specific highlight group definitions, edit
+`lua/muted/highlights.lua`. Groups are set via `vim.api.nvim_set_hl()`.
+
+==============================================================================
+10. TROUBLESHOOTING                                        *muted-troubleshooting*
+
+------------------------------------------------------------------------------
+Colours look wrong / 256-colour mode~
+
+Make sure `termguicolors` is enabled: >lua
+  vim.opt.termguicolors = true
+<
+This must be set before the colourscheme loads.
+
+------------------------------------------------------------------------------
+`:colorscheme muted` gives "E185: Cannot find color scheme"~
+
+The plugin is not on Neovim's `runtimepath`. Either install via a plugin
+manager (see |muted-install-lazy|) or add it manually: >lua
+  vim.opt.runtimepath:prepend("/path/to/muted.nvim")
+<
+
+------------------------------------------------------------------------------
+Some highlight groups look unstyled~
+
+Run `:Inspect` with the cursor on the token in question. This shows which
+highlight group Neovim is applying and whether it resolves to a linked group.
+If the group is not covered by muted.nvim, open an issue on the repository
+with the group name from `:Inspect` output.
+
+------------------------------------------------------------------------------
+Plugin highlights not applying~
+
+Ensure muted.nvim loads with `priority = 1000` (lazy.nvim) or appears early
+in your config so it loads before plugin UI is rendered.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:

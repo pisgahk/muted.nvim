@@ -1,0 +1,16 @@
+muted-api	muted.txt	/*muted-api*
+muted-contents	muted.txt	/*muted-contents*
+muted-customisation	muted.txt	/*muted-customisation*
+muted-flavours	muted.txt	/*muted-flavours*
+muted-install	muted.txt	/*muted-install*
+muted-install-lazy	muted.txt	/*muted-install-lazy*
+muted-install-local	muted.txt	/*muted-install-local*
+muted-intro	muted.txt	/*muted-intro*
+muted-plugins	muted.txt	/*muted-plugins*
+muted-requirements	muted.txt	/*muted-requirements*
+muted-structure	muted.txt	/*muted-structure*
+muted-troubleshooting	muted.txt	/*muted-troubleshooting*
+muted-usage	muted.txt	/*muted-usage*
+muted.load()	muted.txt	/*muted.load()*
+muted.palette	muted.txt	/*muted.palette*
+muted.txt	muted.txt	/*muted.txt*

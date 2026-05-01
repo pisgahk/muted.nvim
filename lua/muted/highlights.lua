@@ -59,11 +59,6 @@ function M.get(p)
 
 		MatchParen = { fg = p.fg_bright, bg = p.bg_search, bold = true },
 
-		NonText = { fg = p.fg_nontext },
-		SpecialKey = { fg = p.fg_nontext },
-		Whitespace = { fg = p.fg_nontext },
-		EndOfBuffer = { fg = p.bg }, -- hide ~ markers
-
 		MsgArea = { fg = p.fg_muted, bg = p.bg },
 		MsgSeparator = { fg = p.fg_winsep, bg = p.bg_winsep },
 		MoreMsg = { fg = p.sage, bold = true },
@@ -76,7 +71,13 @@ function M.get(p)
 		SpellLocal = { sp = p.olive, undercurl = true },
 		SpellRare = { sp = p.purple, undercurl = true },
 
-		Directory = { fg = p.sage },
+		Directory = { fg = p.sage }, -- Responsible for the snacks.explorer
+        NonText = { fg = p.fg_nontext },
+
+		SpecialKey = { fg = p.fg_nontext },
+		Whitespace = { fg = p.fg_nontext },
+		EndOfBuffer = { fg = p.bg }, -- hide ~ markers
+
 		Title = { fg = p.fg_bright, bold = true },
 
 		QuickFixLine = { fg = p.fg_bright, bg = p.bg_qf, bold = true },

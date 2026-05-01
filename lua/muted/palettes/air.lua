@@ -62,7 +62,6 @@
 
 -- -------------------------------------------------------------------------------------
 
-
 -- lua/muted/palettes/air.lua
 -- Monochromatic dark variant of muted.nvim.
 -- Same dark background family as earth/fire/water.
@@ -70,57 +69,57 @@
 -- purely through luminance and decoration, zero hue.
 return {
 	-- Backgrounds — same dark stack as other variants
-	bg            = "#202020",
-	bg_float      = "#202020",
-	bg_conceal    = "#262626",
-	bg_nontext    = "#303030",
-	bg_linenr     = "#222222",
-	bg_popup      = "#303030",
-	bg_popup_sb   = "#262626",
-	bg_status     = "#2a2a2a",
-	bg_tab        = "#212121",
-	bg_tab_sel    = "#404040",
-	bg_visual     = "#383838",
-	bg_search     = "#484848",
-	bg_winsep     = "#111111",
-	bg_qf         = "#303030",
+	bg = "#202020",
+	bg_float = "#202020",
+	bg_conceal = "#262626",
+	bg_nontext = "#303030",
+	bg_linenr = "#222222",
+	bg_popup = "#303030",
+	bg_popup_sb = "#262626",
+	bg_status = "#2a2a2a",
+	bg_tab = "#212121",
+	bg_tab_sel = "#404040",
+	bg_visual = "#383838",
+	bg_search = "#484848",
+	bg_winsep = "#111111",
+	bg_qf = "#303030",
 	-- Diff backgrounds — neutral tints, no hue
-	bg_diff_add   = "#252a25",
-	bg_diff_chg   = "#252528",
-	bg_diff_del   = "#2e2525",
-	bg_diff_txt   = "#2a2820",
+	bg_diff_add = "#252a25",
+	bg_diff_chg = "#252528",
+	bg_diff_del = "#2e2525",
+	bg_diff_txt = "#2a2820",
 	-- Foregrounds — full greyscale luminance stack
 	-- This is where all hierarchy lives in air.
 	-- Tier 1 (signal):    #e8e8e8 — bright off-white, types and functions
 	-- Tier 2 (structure): #a0a0a0 — mid grey, keywords
 	-- Tier 3 (recede):    #686868 — dark grey, strings, specials
 	-- Comment:            #4a4a4a — barely above background, peripheral
-	fg            = "#e8e8e8",
-	fg_bright     = "#f5f5f5",
-	fg_muted      = "#b0b0b0",
-	fg_comment    = "#4a4a4a",
-	fg_linenr     = "#707070",
-	fg_linenr2    = "#484848",
-	fg_winsep     = "#383838",
-	fg_nontext    = "#303030",
-	fg_special    = "#585858",
+	fg = "#e8e8e8",
+	fg_bright = "#f5f5f5",
+	fg_muted = "#b0b0b0",
+	fg_comment = "#4a4a4a",
+	fg_linenr = "#707070",
+	fg_linenr2 = "#484848",
+	fg_winsep = "#383838",
+	fg_nontext = "#777777",
+	fg_special = "#585858",
 	-- Syntax — pure luminance, zero hue
 	-- Tier 1: types and functions get the brightest non-fg tones
 	-- Tier 2: keywords sit clearly below Tier 1
 	-- Tier 3: strings, specials, identifiers recede toward comment level
-	yellow        = "#d8d8d8",  -- Type       — bright grey, strong Tier 1
-	gold          = "#909090",  -- Operator   — mid grey, Tier 2 structural
-	olive         = "#686868",  -- String     — dark grey, Tier 3 receding
-	sage          = "#787878",  -- Directory  — slightly above strings
-	purple        = "#c0c0c0",  -- Function   — bright-mid grey, Tier 1 callable
-	steel         = "#606060",  -- Identifier — low grey, Tier 3 anchor
-	tan           = "#707070",  -- Question
-	sand          = "#686868",  -- TabLine
-	error_red     = "#c34143",  -- Error      — only hue in the palette
+	yellow = "#d8d8d8", -- Type       — bright grey, strong Tier 1
+	gold = "#909090", -- Operator   — mid grey, Tier 2 structural
+	olive = "#686868", -- String     — dark grey, Tier 3 receding
+	sage = "#787878", -- Directory  — slightly above strings
+	purple = "#c0c0c0", -- Function   — bright-mid grey, Tier 1 callable
+	steel = "#606060", -- Identifier — low grey, Tier 3 anchor
+	tan = "#707070", -- Question
+	sand = "#686868", -- TabLine
+	error_red = "#c34143", -- Error      — only hue in the palette
 	-- Popup
-	popup_fg      = "#787878",
-	popup_sel     = "#c8c8c8",
+	popup_fg = "#787878",
+	popup_sel = "#c8c8c8",
 	-- Substitute
-	sub_fg        = "#202020",
-	sub_bg        = "#c0c0c0",
+	sub_fg = "#202020",
+	sub_bg = "#c0c0c0",
 }

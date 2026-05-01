@@ -31,7 +31,7 @@ return {
 	fg_linenr = "#d6d2c8",
 	fg_linenr2 = "#888888",
 	fg_winsep = "#888888",
-	fg_nontext = "#303030",
+	fg_nontext = "#777777",
 	fg_special = "#676767",
 	-- Syntax
 	-- yellow        = "#E3D896", -- Type
@@ -51,4 +51,7 @@ return {
 	-- Substitute
 	sub_fg = "#1A1A1A",
 	sub_bg = "#C1C88D",
+
+	-- Test Color
+	test_color = "#aa88d8",
 }
